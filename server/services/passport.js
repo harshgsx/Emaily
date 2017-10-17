@@ -14,7 +14,21 @@ const User = mongoose.model('users');
 // console.log('access token',accessToken);
 // console.log('refresh token', refereshToken);
 // console.log('profile', profile); 
-new User ({ googleId: profile.id }).save();
+User.findOne({ googleId: profile.id }).then((existingUser) => { // promise approach 
+		if (existingUser){
+			//record exist
+			// console.log('user exist');
+			// console.print(googleId);
+		}
+		else{
+				//make a new record
+			new User ({ googleId: profile.id }).save();
+			// console.log('user added');
+			// console.print(googleId);
+		}
+	})
+
+
 
 })
 );
