@@ -9,4 +9,8 @@
 
 
 app.get('/auth/google/callback',passport.authenticate('google')); 
+
+app.get('/api/user', (req, res) => {
+	res.send(req.user);
+});
 };
