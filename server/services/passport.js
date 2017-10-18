@@ -12,37 +12,39 @@ passport.use(new GoogleStrategy({
 	clientSecret: keys.googleClientSecret,
 	callbackURL: '/auth/google/callback'
 },
-(accessToken, refereshToken, profile, done )=> {
+async (accessToken, refereshToken, profile, done )=> {
 // console.log('access token',accessToken);
 // console.log('refresh token', refereshToken);
 // console.log('profile', profile); 
-User.findOne({ googleId: profile.id }).then((existingUser) => { // promise approach 
+const existingUser = await User.findOne({ googleId: profile.id }) //new async approach
+ // .then((existingUser) => { // promise approach 
 			if (existingUser){
 				//record exist
 				// console.log('user exist');
 				// console.print(googleId);
-				done(null,existingUser);
+				return done(null,existingUser);
 				}
-			else{
+			
 				//make a new record
-				new User ({ googleId: profile.id }).save().then(user => done(null,user));
+				const user = await new User ({ googleId: profile.id }).save()
+				done(null, user);
+				// .then(user => done(null,user));
 				// console.log('user added');
 				// console.print(googleId);
-				}
-		});
+			
+		
 	})
 );
 
 passport.serializeUser((user, done) => {
 done(null, user.id);
-console.log('user serialization done');
+// console.log('user serialization done');
 });
 
 passport.deserializeUser((id, done) => {
 User.findById(id)
 .then( user => {
 	done(null, user);
-	console.log('deserializeUser');
+	// console.log('deserializeUser');
 });
-
 });
