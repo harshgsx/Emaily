@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'materialize-css/dist/css/materialize.css';
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux'; 
 import reduxThunk from 'redux-thunk';
@@ -17,3 +17,5 @@ ReactDOM.render(
 <Provider  store={store} ><App /></Provider>,
                  document.querySelector('#root'));
 
+// console.log('STRIPE KEY IS ',process.env.REACT_APP_STRIPE_KEY	);
+// console.log(process.env.NODE_ENV);
