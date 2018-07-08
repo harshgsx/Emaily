@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import 'materialize-css/dist/css/materialize.css';
 import { Link } from 'react-router-dom';
 import Payments from './Payments';
+//import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import '..//custom.css';
 
 class Header extends Component{
+
 
 renderContent() {
 
@@ -17,13 +20,15 @@ renderContent() {
       return [
       
       <li key="1"><Payments /></li>,
+      <li key="3" style={{ margin: '0 10px' }}> Credits: {this.props.auth.credits}</li>,
       <li key="2"><a href="/api/logout">Logout</a></li>
-
+      
       ];
 
 
   }
 }
+
 
 	render() {
 
@@ -31,14 +36,14 @@ renderContent() {
 		return (
 
           <nav>
-          <div className="nav-wrapper">
-
+          <div className="nav-wrapper">          
           <Link to={  this.props.auth ? '/surveys' : '/' } 
           className="left brand-logo">Emaily</Link>
           <ul className="right">
           {this.renderContent()}
-             </ul>
-             </div>
+          </ul>
+          
+          </div>
           </nav>
 
 		        );

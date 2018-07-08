@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 
 require ('./models/User');
+require('./models/Survey');
 require ('./services/passport'); 
 
 
@@ -20,8 +21,9 @@ mongoose.connect(keys.mongoURI);
 
 
 const app = express();
-
+//body parser is express middelware so it must be wired here
 app.use(bodyParser.json());
+
 app.use(
 
         cookieSession({
@@ -38,9 +40,10 @@ app.use(passport.session());
 // authRoutes(app);
 require ('./routes/authRoutes')(app);
 require('./routes/billingRouts')(app);
+require('./routes/surveyRoute')(app);	
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 80;
 app.listen(PORT);
-// http://localhost:5000
-// mongoose.connect('mongodb://127.0.0.1:27017/emaily-dev');
+
+ mongoose.connect('mongodb://127.0.0.1:27017/emaily-dev');
 // require ('./services/passport')(app);
