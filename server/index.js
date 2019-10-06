@@ -45,5 +45,5 @@ require('./routes/surveyRoute')(app);
 const PORT = process.env.PORT || 80;
 app.listen(PORT);
 
- mongoose.connect('mongodb://127.0.0.1:27017/emaily-dev');
+ mongoose.connect('mongodb://192.168.0.106:27017/emaily-dev');
 // require ('./services/passport')(app);
